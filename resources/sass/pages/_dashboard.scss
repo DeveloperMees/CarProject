@@ -1,0 +1,33 @@
+#dashboard {
+    margin: 180px 0;
+
+    .sidebar {
+        margin-top: 55px;
+
+        .nav-item {
+            margin: 3px 0;
+
+            a {
+                font-size: 16px;
+            }
+        }
+    }
+
+    main {
+        .button {
+            margin-right: 25px;
+
+            &:last-of-type {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .content {
+        .top-content {
+            h2 {
+                margin-top: 20px;
+            }
+        }
+    }
+}

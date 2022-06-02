@@ -1,0 +1,37 @@
+*{
+    @import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
+    font-family: 'Michroma', sans-serif;
+}
+
+.container-fluid {
+    margin: 0 auto;
+    min-width: 320px;
+    max-width: 1440px;
+    padding: 0 15px;
+}
+
+.errormessage {
+    position: absolute;
+    bottom: 36px;
+    right: 30px;
+    background: #000F35;
+    color: #FFFFFF;
+    padding: 10px 16px;
+    border-radius: 5px;
+}
+
+a {
+    color: black !important;
+    text-decoration: none !important;
+
+    &:hover {
+        color: #b4c4d5 !important;
+    }
+}
+
+#app {
+    margin-top: 120px;
+}
+
+
+

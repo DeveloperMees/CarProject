@@ -1,0 +1,29 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+//Global
+@import 'global';
+
+// Variables
+@import 'variables';
+
+// Assets
+@import "resources/sass/assets/bootstrap";
+@import "resources/sass/assets/button";
+
+// Pages
+@import 'pages/index';
+@import 'pages/create';
+@import 'pages/dashboard';
+
+// Auth
+@import 'auth/login';
+
+// Partials
+@import 'partials/header';
+@import 'partials/footer';
+@import 'partials/hero';
+@import 'partials/object';
+
+//// Bootstrap
+//@import '~bootstrap/scss/bootstrap';
