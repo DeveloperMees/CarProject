@@ -11,21 +11,77 @@ use App\Models\Media;
 class BrandController extends Controller
 {
 
-    // Create a brand
+    // Go to the creating section
 
     public function create()
     {
         return view('dashboard.brands.create');
     }
 
-    public function store(BrandsRequest $request, Brand $brand)
+    // Create an object
+
+    public function store(BrandsRequest $request, Brand $brand, Media $media)
     {
+
+        $file = $request->file;
         $brand->fill($request->all());
         $brand->save();
+
+        if ($request->hasFile('file')){
+            $media->fill([
+                'mediable_type' => 'App\Models\Brand',
+                'mediable_id' => $brand->id,
+                'title' => date('YmdHi').$file->getClientOriginalName(),
+                'url' => '/media/'.date('YmdHi').$file->getClientOriginalName()
+            ]);
+
+            $file->move(public_path('media'), $media['title']);
+            $media->save();
+        }else {
+            dd('fails');
+        }
 
 
         return redirect()->back()->with('message', 'Merk is toegevoegd!');
     }
 
+    // Go to the edit section
 
+    public function edit($id)
+    {
+        $brand = Brand::findorfail($id);
+
+        return view('dashboard.brands.edit', [
+            'brand' => $brand
+        ]);
+    }
+
+
+//     Update an object
+
+    public function update(BrandsRequest $request, Brand $brand, Media $media, $id)
+    {
+        $brand = Brand::findorfail($id);
+        $media = $brand->images;
+
+        dd($media);
+        $file = $request->file;
+        $brand->fill($request->all());
+        $brand->save();
+
+        if ($request->hasFile('file')){
+            $media->update([
+                'mediable_type' => 'App\Models\Brand',
+                'mediable_id' => $brand->id,
+                'title' => date('YmdHi').$file->getClientOriginalName(),
+                'url' => '/media/'.date('YmdHi').$file->getClientOriginalName()
+            ]);
+
+            $media->save();
+        }
+
+
+        return redirect()->back()->with('message', 'Merk is aangepast!');
+    }
 }
+

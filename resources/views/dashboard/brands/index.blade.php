@@ -2,6 +2,13 @@
 
 @section('dashboardContent')
     <section id="brands">
-        h1
+        @foreach($brands as $brand)
+            <h1>{{ $brand->name }}</h1>
+            @foreach($brand->images as $image)
+                <img src="{{ $image->url }}" alt="">
+            @endforeach
+
+            <a href="{{ route('/brands/edit', ['id' => $brand->id]) }}">aanpassen</a>
+        @endforeach
     </section>
 @stop

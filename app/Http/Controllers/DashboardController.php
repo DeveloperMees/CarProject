@@ -19,16 +19,10 @@ class DashboardController extends Controller
 
     public function brands()
     {
-        $brand = Brand::find(1);
+        $brands = Brand::all();
 
-        foreach ($brand->images as $image) {
-            dd($image);
-        }
-        $user = User::first(1);
-
-        foreach ($user->images as $image) {
-            dd($image);
-        }
-        return view('dashboard.brands.index');
+        return view('dashboard.brands.index', [
+            'brands' => $brands
+        ]);
     }
 }

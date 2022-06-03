@@ -19,9 +19,10 @@
                     </div>
                 </div>
             </div>
-
-                        shape for topsite
+            <img src="{{asset('/img/boykie_is_chala.png')}}" alt="">
+            <img src="img/boykie_is_chala.png" alt="">
             <div class="shape" id="shape">
+
                 <div class="text">
                     <h2>Wij gaan verhuizen</h2>
                     <p>Per 31 maart 2022 gaan wij verhuizen naar <span>Piet Heinstraat 16</span> te Goes.</p>

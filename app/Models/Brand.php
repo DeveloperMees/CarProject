@@ -12,7 +12,11 @@ class Brand extends Model
      *
      * @var array<int, string>
      */
-    protected $guarded = [];
+    protected $fillable = [
+        'id',
+        'name',
+        'description',
+    ];
 
 
     /**
