@@ -25,5 +25,13 @@
 @import 'partials/hero';
 @import 'partials/object';
 
+
+//////////////////////////// cms
+
+//brands
+@import "cms/brands/show";
+@import "cms/brands/index";
+
+
 //// Bootstrap
 //@import '~bootstrap/scss/bootstrap';

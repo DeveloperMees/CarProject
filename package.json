@@ -24,6 +24,7 @@
         "@targomo/core": "^0.4.2",
         "@targomo/googlemaps": "^0.0.9",
         "bootstrap": "^4.6.0",
+        "dropzone": "^6.0.0-beta.2",
         "js-info-bubble": "^0.8.0",
         "luminous-lightbox": "^2.3.3",
         "swiper": "^6.4.8"

@@ -61,27 +61,44 @@ class BrandController extends Controller
 
     public function update(BrandsRequest $request, Brand $brand, Media $media, $id)
     {
+        $deletedImages = $request->input('delete-image');
         $brand = Brand::findorfail($id);
-        $media = $brand->images;
-
-        dd($media);
         $file = $request->file;
         $brand->fill($request->all());
         $brand->save();
 
         if ($request->hasFile('file')){
-            $media->update([
+            $media->fill([
                 'mediable_type' => 'App\Models\Brand',
                 'mediable_id' => $brand->id,
                 'title' => date('YmdHi').$file->getClientOriginalName(),
                 'url' => '/media/'.date('YmdHi').$file->getClientOriginalName()
             ]);
 
+            $file->move(public_path('media'), $media['title']);
             $media->save();
         }
 
+        // Delete object
+
+        if (isset($deletedImages) ) {
+            Media::destroy($deletedImages);
+
+            return redirect()->back()->with('message', 'Merk is aangepast of verwijderd!');
+
+        }
 
         return redirect()->back()->with('message', 'Merk is aangepast!');
+    }
+
+
+//    Deleting an object
+
+    public function delete($id)
+    {
+        $brand = Brand::find($id);
+        $brand->delete();
+        return redirect()->to('/brands')->with('message', 'Merk is verwijderd!');
     }
 }
 

@@ -2,13 +2,19 @@
 
 @section('dashboardContent')
     <section id="brands">
-        @foreach($brands as $brand)
-            <h1>{{ $brand->name }}</h1>
-            @foreach($brand->images as $image)
-                <img src="{{ $image->url }}" alt="">
-            @endforeach
+        <div class="row">
+            @foreach($brands as $brand)
+                <div class="col-12 col-md-6 col-lg-3 mt-3">
+                    <div class="tab">
 
-            <a href="{{ route('/brands/edit', ['id' => $brand->id]) }}">aanpassen</a>
-        @endforeach
+                        <h1>{{ $brand->name }}</h1>
+                        @foreach($brand->images as $image)
+                            <img src="{{ $image->url }}" alt="">
+                        @endforeach
+                        <a href="{{ route('/brands/edit', ['id' => $brand->id]) }}">aanpassen</a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </section>
 @stop
