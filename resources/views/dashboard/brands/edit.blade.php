@@ -21,9 +21,8 @@
         @if($errors->any())
             <h4>{{$errors->first()}}</h4>
         @endif
-        <form action="/target" class="dropzone"></form>
 
-        <form action="{{ route('/brands/update', ['id' => $brand->id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('/brands/update', ['id' => $brand->id]) }}"  method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -33,9 +32,7 @@
 
             <h2 class="mt-5">Afbeeldingen</h2>
             <p class="mt-3">Afbeelding toevoegen</p>
-            <div class="form-group">
-                <input type="file" name="file">
-            </div>
+            <input type="file" name="file">
             @if(!count($brand->images) == 0)
                 <p class="mt-3">Afbeelding verwijderen</p>
                 <div class="row">
@@ -47,7 +44,9 @@
                     @endforeach
                 </div>
             @endif
-            <button class="button mt-3" type="submit">Submit</button>
+            <button class="button mt-4 d-block" type="submit">Submit</button>
         </form>
+
     </section>
+
 @stop

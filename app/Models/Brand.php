@@ -18,6 +18,12 @@ class Brand extends Model
         'description',
     ];
 
+    public function scopeFiler($query)
+    {
+        $query
+            ->where('name', 'like', '%'. \request('search') . '%');
+
+    }
 
     /**
      * Get all of the post's comments.

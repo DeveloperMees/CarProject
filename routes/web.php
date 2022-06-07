@@ -41,3 +41,4 @@ Route::get('/brands/{id}/edit', [BrandController::class, 'edit'])->name('/brands
 Route::put('/brands/update/{id}', [BrandController::class, 'update'])->name('/brands/update');
 Route::put('/brands/delete/{id}', [BrandController::class, 'delete'])->name('/brands/delete');
 
+Route::get('/brands/results/{query}', [BrandController::class, 'getResults']);

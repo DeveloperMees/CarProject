@@ -19,10 +19,14 @@ class DashboardController extends Controller
 
     public function brands()
     {
-        $brands = Brand::all();
+        $brands = Brand::latest();
+
+        if (\request('search')) {
+            $brands->where('name', 'like', '%'. \request('search') . '%');
+        }
 
         return view('dashboard.brands.index', [
-            'brands' => $brands
+            'brands' => $brands->get()
         ]);
     }
 }

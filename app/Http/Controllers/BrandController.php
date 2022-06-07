@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BrandsRequest;
 use App\Models\Brand;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\Media;
@@ -27,17 +28,17 @@ class BrandController extends Controller
         $brand->fill($request->all());
         $brand->save();
 
-        if ($request->hasFile('file')){
+        if ($request->hasFile('file')) {
             $media->fill([
                 'mediable_type' => 'App\Models\Brand',
                 'mediable_id' => $brand->id,
-                'title' => date('YmdHi').$file->getClientOriginalName(),
-                'url' => '/media/'.date('YmdHi').$file->getClientOriginalName()
+                'title' => date('YmdHi') . $file->getClientOriginalName(),
+                'url' => '/media/' . date('YmdHi') . $file->getClientOriginalName()
             ]);
 
             $file->move(public_path('media'), $media['title']);
             $media->save();
-        }else {
+        } else {
             dd('fails');
         }
 
@@ -62,17 +63,19 @@ class BrandController extends Controller
     public function update(BrandsRequest $request, Brand $brand, Media $media, $id)
     {
         $deletedImages = $request->input('delete-image');
+
         $brand = Brand::findorfail($id);
+
         $file = $request->file;
         $brand->fill($request->all());
         $brand->save();
 
-        if ($request->hasFile('file')){
+        if ($request->hasFile('file')) {
             $media->fill([
                 'mediable_type' => 'App\Models\Brand',
                 'mediable_id' => $brand->id,
-                'title' => date('YmdHi').$file->getClientOriginalName(),
-                'url' => '/media/'.date('YmdHi').$file->getClientOriginalName()
+                'title' => date('YmdHi') . $file->getClientOriginalName(),
+                'url' => '/media/' . date('YmdHi') . $file->getClientOriginalName()
             ]);
 
             $file->move(public_path('media'), $media['title']);
@@ -81,7 +84,7 @@ class BrandController extends Controller
 
         // Delete object
 
-        if (isset($deletedImages) ) {
+        if (isset($deletedImages)) {
             Media::destroy($deletedImages);
 
             return redirect()->back()->with('message', 'Merk is aangepast of verwijderd!');
@@ -99,6 +102,19 @@ class BrandController extends Controller
         $brand = Brand::find($id);
         $brand->delete();
         return redirect()->to('/brands')->with('message', 'Merk is verwijderd!');
+    }
+
+    public function getResults(Brand $brands, $query)
+    {
+        $brands = Brand::latest();
+
+        return $brands->where('name', 'like', '%' . $query . '%')->get()->map(function($brand) {
+            return [
+                'name' => $brand->name,
+                'image' => $brand->images->first()->url ?? '#'
+            ];
+        });
+
     }
 }
 
